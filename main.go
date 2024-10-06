@@ -8,6 +8,7 @@ import (
 
 func main() {
 	// routes
+	routers.HomeRoutes()
 	routers.UserRoutes()
 
 	fmt.Println("Sunucu başlatıldı!")
