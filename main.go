@@ -2,6 +2,7 @@ package main
 
 import (
 	"api/routers"
+	"api/utils"
 	"fmt"
 	"net/http"
 )
@@ -10,6 +11,8 @@ func main() {
 	// routes
 	routers.HomeRoutes()
 	routers.UserRoutes()
+	
+	utils.Db()
 
 	fmt.Println("Sunucu başlatıldı!")
 
