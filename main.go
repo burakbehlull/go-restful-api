@@ -5,6 +5,7 @@ import (
 	"api/utils"
 	"fmt"
 	"net/http"
+	"os"
 )
 
 func main() {
@@ -12,11 +13,14 @@ func main() {
 	routers.HomeRoutes()
 	routers.UserRoutes()
 	
+	utils.LoadDotenv()
 	utils.Db()
+
+	port := os.Getenv("PORT")
 
 	fmt.Println("Sunucu başlatıldı!")
 
-	err := http.ListenAndServe(":8000", nil)
+	err := http.ListenAndServe(":"+port, nil)
 	if err != nil {
 		fmt.Println("Sunucu başlatılamadı: ", err)
 	}
