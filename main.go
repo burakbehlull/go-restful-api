@@ -14,13 +14,18 @@ func main() {
 	routers.UserRoutes()
 	
 	utils.LoadDotenv()
-	utils.Db()
+	client, err := utils.Db()
+	
+	if err != nil {
+		fmt.Println("MongoDB bağlantı hatası:", err)
+		defer client.Disconnect(nil)
+	}
 
 	port := os.Getenv("PORT")
 
 	fmt.Println("Sunucu başlatıldı!")
 
-	err := http.ListenAndServe(":"+port, nil)
+	err = http.ListenAndServe(":"+port, nil)
 	if err != nil {
 		fmt.Println("Sunucu başlatılamadı: ", err)
 	}
